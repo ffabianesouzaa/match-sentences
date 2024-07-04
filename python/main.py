@@ -1,14 +1,11 @@
-# O objetivo é padronizar o nome da ocupação nas planilhas 'ocupadas' e 'ofertadas'
-# conforme a planilha 'Skills' (nome com primeira letra maiúscula e demais minúsculas, com todos os acentos
-
 import pandas as pd
 from difflib import get_close_matches
 
-# Função que compara strings buscando as que mais são compativeis
-def encontra_correspondencia(palavra, lista_palavras):
-    correspondencias = get_close_matches(palavra, lista_palavras)
-    if correspondencias:
-        return correspondencias[0]
+# Função que compara strings buscando as mais compativeis
+def find_match(word, word_list):
+    matchs = get_close_matches(word, word_list)
+    if matchs:
+        return matchs[0]
     else:
         return None
 
@@ -28,7 +25,7 @@ for indice, celula in enumerate(planilha.iloc[:, 1]):
         planilha.iat[indice, 1] = celula
     else:
         # Encontrar a correspondência mais próxima
-        correspondencia = encontra_correspondencia(celula, strings_padrao)
+        correspondencia = find_match(celula, strings_padrao)
         if correspondencia:
             # Substituir na planilha 2 pela correspondência mais próxima
             planilha.iat[indice, 1] = correspondencia
