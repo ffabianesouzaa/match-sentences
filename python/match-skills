@@ -1,0 +1,11 @@
+import pandas as pd
+
+# Carrega as planilhas
+planilha1 = pd.read_excel('C:/Users/DELL/Dropbox/match-sentences/Sheets/CBO.xlsx')
+planilha2 = pd.read_excel('C:/Users/DELL/Dropbox/match-sentences/Sheets/Atitudes.xlsx')
+
+# Faz a junção (merge) das planilhas com base na coluna CodCBO
+planilha2 = planilha2.merge(planilha1[['CodCBO', 'Ocupação']], on='CodCBO', how='left')
+
+# Salva a Planilha 2 atualizada com a nova coluna Ocupação
+planilha2.to_excel('Atitudes.xlsx', index=False)
